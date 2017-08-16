@@ -19,7 +19,7 @@ class getcbsdetails extends Controller
       if($op=="cid")
       {
         $acno=$param1;
-        $url='http://10.249.4.26:88/apyservice/apyservice.asp?op=cid&acno='.$acno;
+        $url='http://59.99.240.178:88/apyservice/apyservice.asp?op=cid&acno='.$acno;
         $response=$client->get($url);
      
         

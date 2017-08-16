@@ -82,7 +82,7 @@ class AuthController extends Controller
 		$client=new Client();
 		$this->validate($request,['username'=>'required|numeric|digits:5','password'=>'required'],
 										['username.*'=>'Username is mandatory and should be the rollno','password.*'=>'Password is mandatory']);
-			$url='http://10.249.4.26:88/apyservice/apyservice.asp?op=ud&uid='.$request->get('username');
+			$url='http://59.99.240.178:88/apyservice/apyservice.asp?op=ud&uid='.$request->get('username');
         $response=$client->get($url);
 				     $d=json_decode($response->getBody(),true);
         

@@ -42,13 +42,34 @@
                           <li> <a href="<?php echo e(url('registersub')); ?>"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;Register</a></li>
                           <li class="divider"></li>
                           <li><a href="<?php echo e(url('approvenew')); ?>"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Approve</a></li>
-                     <!--     <li class="divider"></li>
-                          <li><a href="#"><i class="fa fa-arrows-v"></i>&nbsp;&nbsp;&nbsp;&nbsp;Upgrade/Downgrade Pension</a></li>
+                         <li class="divider"></li>
+                          <li><a href="<?php echo e(url('findatamod/penupdw')); ?>"><i class="fa fa-arrows-v"></i>&nbsp;&nbsp;&nbsp;&nbsp;Upgrade/Downgrade Pension</a></li>
+                          <li class="divider"></li>
+                          <li><a href="<?php echo e(url('findatamod/freqmod')); ?>"><i class="fa fa-arrows-v"></i>&nbsp;&nbsp;&nbsp;&nbsp;Modify Frequency</a></li>
                           <li class="divider"></li>
                           <li><a href="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;&nbsp;Modify Subscriber Details</a></li>
                           <li class="divider"></li>
-                          <li><a href="#"><i class="fa fa-close"></i>&nbsp;&nbsp;&nbsp;&nbsp;Voluntary Exit</a></li>
--->
+                          <li><a href="<?php echo e(url('volexit')); ?>"><i class="fa fa-close"></i>&nbsp;&nbsp;&nbsp;&nbsp;Voluntary Exit</a></li>
+
+                        </ul>
+                      </li>
+                            <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                          <i class="fa fa-user-o fa-lg"> </i>
+                          Documents
+                          <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li> <a href="<?php echo e(url('docs/apysuitemanual.pdf')); ?>" target="blank"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;User Manual</a></li>
+                          <li class="divider"></li>
+                          <li><a href="<?php echo e(url('docs/APY_FAQs.pdf')); ?>" target="blank"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;FAQs</a></li>
+                         <li class="divider"></li>
+                          <li><a href="<?php echo e(url('docs/APY_subscriber_form.pdf')); ?>" target="blank"><i class="fa fa-file-o"></i>
+                            &nbsp;&nbsp;&nbsp;&nbsp;New Subscriber Form</a></li>
+                          <li class="divider"></li>
+                          <li><a href="<?php echo e(url('docs/APY_Voluntary_Exit_Form.pdf')); ?>" target="blank"><i class="fa fa-file-o"></i>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Voluntary Exit Form</a></li>
+                          
+
                         </ul>
                       </li>
                 <?php if(Session::get('brcode')=='5001'): ?>   
@@ -65,6 +86,15 @@
                           <li><a href="<?php echo e(url('gencbsfile')); ?>"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Generate CBS Vouch File</a></li>
                           <li class="divider"></li>
                           <li><a href="<?php echo e(url('gencontrfile')); ?>"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Contribution File</a></li>
+                          <li class="divider"></li>
+                          <li><a href="<?php echo e(url('genvolexitfile')); ?>"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Voluntary Exit File</a></li>
+                          <li class="divider"></li>
+                          <li><a href="<?php echo e(url('genmodfile')); ?>/submod"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Subscriber Modification File</a></li>
+                          <li class="divider"></li>
+                          <li><a href="<?php echo e(url('genmodfile')); ?>/penupdw"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Pension Modification File</a></li>
+                          <li class="divider"></li>
+                          <li><a href="<?php echo e(url('genmodfile')); ?>/freqmod"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Frequency Modification File</a></li>
+                          
           <!--                <li class="divider"></li>
                           <li><a href="#"><i class="fa fa-file-text"></i>&nbsp;&nbsp;&nbsp;&nbsp;Subscriber Modify File</a></li>
               -->            
