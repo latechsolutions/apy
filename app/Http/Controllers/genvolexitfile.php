@@ -39,7 +39,7 @@ class genvolexitfile extends Controller
       $out=$out."<transaction-type>A</transaction-type></header>";
       foreach($pendingrec as $rec)
       {
-        $out=$out."<req-dtl><pran>".$rec['pran_no']."</pran><wdr-due-to>EN</wdr-due-to><wdr-type>P</wdr-type>";
+        $out=$out."<req-dtl><pran>".$rec['pran_no']."</pran><wdr-due-to>EN</wdr-due-to><wdr-type>F</wdr-type>";
         $out=$out."<share-to-wdr>100</share-to-wdr><share-to-annuity>0</share-to-annuity>";
         $out=$out."<exit-date>".Carbon::today()->format('Y-m-d')."</exit-date>";
         $out=$out."<subs-bank-dtls><bank-ifs-flag>Y</bank-ifs-flag>".
