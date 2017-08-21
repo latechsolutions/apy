@@ -30,7 +30,7 @@ class approvenew extends Controller
     {
      $userid=Auth::user()->username;
       $pendingrec=subscribermaster::where('pran_no',$pran)->where('status','EN')->first();
-      $todaydt=Carbon::today();
+      $todaydt=Carbon::createFromFormat('Y-m-d',$pendingrec->appl_dt)->startOfDay();
       $payfreq=$pendingrec->pay_freq;
       if($payfreq=='M')
       $fromdt=$todaydt->modify('first day of this month')->toDateString();
