@@ -12,6 +12,7 @@
 	use App\jobstatus;
 	use App\premiumhistory;
   use Log;
+use Storage;
 	
 	class calculatepremium extends Job implements ShouldQueue
 	{
@@ -48,17 +49,25 @@
    
      public function handle()
    {
-   	$jobid=$this->job->getJobId();
+			 jobstatus::where('status','completed')->delete();
+			    	$jobid=$this->job->getJobId();
+
    	$job=jobstatus::create(['job_id'=>$jobid,'job_type'=>'calcprem','status'=>'running','comp_percent'=>'0%']);
    	$todaydt=Carbon::today();
-   	$acpranlist=subscribermaster::where('status','AC')->get();
-   	$totalcnt=count($acpranlist);
-   	$i=1;
-   	foreach($acpranlist as $acpran)
+			Storage::append('logs/log_'.$todaydt->toDateString().'.txt',Carbon::now().'				Job'.$jobid.'started.');
+   	//$acpranlist=subscribermaster::where('status','AC')->get();
+   	$totalcnt=subscribermaster::where('status','AC')->count();
+   	$i=1; 	 
+	//		subscribermaster::where('status','AC')->chunk(1000,function ($acpranlist) use ($jobid,$job,$todaydt,$i,$totalcnt){
+				
+   	foreach(subscribermaster::where('status','AC')->cursor() as $acpran)
    	{
-			
+			Storage::append('logs/log_'.$todaydt->toDateString().'.txt',Carbon::now().'				Pran'.$acpran->pran_no.'started.');
+			try
+			{
   $job->comp_percent=($i/$totalcnt)*100;
   $job->save();
+	Storage::append('logs/log_'.$todaydt->toDateString().'.txt',Carbon::now().'				Percent'.(($i/$totalcnt)*100).'% over.');
  $appldt=Carbon::createFromFormat('Y-m-d',$acpran->appl_dt)->startOfDay();
  $todaydt=Carbon::today()->startOfDay();
  $pranno=$acpran->pran_no;
@@ -101,6 +110,7 @@
     	->where('premium_mth',$premmth)
     	->where('premium_yr',$premyr)
     	->get();
+			
       if($startdt->copy()->modify('last day of this month')->lt($todaydt) && 
   	!($todaydt->between($appldt->copy()->modify('first day of this month'),$appldt->copy()->modify('last day of this month'))))
           {
@@ -135,9 +145,16 @@
  	}
  }
       $i++;
+			}catch (Exception $exc)
+			{
+				Storage::append('logs/log_'.$todaydt->toDateString().'.txt',Carbon::now().'   '.$exc->getMessage()."\r".$e->getTraceAsString()."\r");
+			}
+			Storage::append('logs/log_'.$todaydt->toDateString().'.txt',Carbon::now().'				Pran'.$acpran->pran_no.' Over.');
    	}
+		
    $job->status='completed';$job->comp_percent="100%";
    $job->save();
+		Storage::append('logs/log_'.$todaydt->toDateString().'.txt',Carbon::now().'				Job'.$jobid.' completed.');
 	}
 
  

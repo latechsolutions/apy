@@ -59,6 +59,7 @@ $('#rundeduction').click(function(){
   $('#progressbar').prop("aria-valuenow","0");
  $('#progressbar').html("0%");
 $('#progressdiv').show();
+      $('#rundeduction').prop("disabled","disabled");
   $.getJSON("{{ url('dedpremium/start') }}",function(data){
     jobid=data.jobid;
     setInterval(getstatusupdate,5000);

@@ -31,8 +31,10 @@ class dedpremium extends Controller
   
   public function status($jobid)
   {
+		
     $jobstatus=jobstatus::where('job_id',$jobid)->get();
     return json_encode(['comppercent'=>$jobstatus[0]['comp_percent']]);
+		
   }
   
   public function getjobid()

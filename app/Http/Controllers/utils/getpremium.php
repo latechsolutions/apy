@@ -24,16 +24,18 @@ class getpremium extends Controller
   public function penupdw($newpenamt,$pran)
   {
     $prandetails=subscribermaster::where('pran_no',$pran)->where('status','AC')->first();
+    
     if(count($prandetails)==0)
-      return json_encode(["status"=>"error"]);
+      return json_encode(["status"=>"error","errormsg"=>"Pran Not Found"]);
     $age=Carbon::createFromFormat('Y-m-d',$prandetails->appl_dt)
                     ->diffInYears(Carbon::createFromFormat('Y-m-d',$prandetails->sub_dob));
+   
     $contributionrec=contributiondetails::where('pension_amt',$newpenamt)->where('freq',$prandetails->pay_freq)
                                           ->where('age',$age)->get();
      if(count($contributionrec)==1)
         return json_encode(["status"=>"success","premium"=>$contributionrec[0]->premium_amt]);
       else
-        return json_encode(["status"=>"error"]);
+        return json_encode(["status"=>"error","errormsg"=>"Contribution Details Not available"]);
   }
     public function freqmod($newpayfreq,$pran)
   {
